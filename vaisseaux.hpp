@@ -1,5 +1,6 @@
 #ifndef VAISSEAUX_HPP_INCLUDED
 #define VAISSEAUX_HPP_INCLUDED
+#include "Initialisation.hpp"
 
 class Vaisseaux
 {
@@ -28,7 +29,5 @@ class Vaisseaux
         float ax, ay;
         float angle;
 };
-
-
 
 #endif // VAISSEAUX_HPP_INCLUDED

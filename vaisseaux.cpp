@@ -1,10 +1,11 @@
 #include "vaisseaux.hpp"
-#include <cmath>
-Vaisseaux::Vaisseaux(float px, float py, float vx,float vy, float ax,float ay, float angle) : px(px), py(py), angle(angle),vx(vx),vy(vy),ax(ax),ay(ay) {}
+Vaisseaux::Vaisseaux(float px, float py, float vx,float vy, float ax,float ay, float angle) : px(px), py(py), angle(angle),vx(vx),vy(vy),ax(ax),ay(ay)
+{
+
+}
 
 void Vaisseaux::step(int dt)
 {
-
     vx += ax * dt;
     vy += ay * dt;
     px += vx * dt;
@@ -12,13 +13,9 @@ void Vaisseaux::step(int dt)
 
     ax = 0;
     ay = 0;
-
-
 }
 void Vaisseaux::applyForce(float fx, float fy)
 {
-    /*ax += fx;
-    ay += fy;*/
     float speed;
     speed = fx;
 
@@ -66,13 +63,11 @@ float Vaisseaux::getAngle() const
 void Vaisseaux::turnLeft()
 {
 
-    angle -= 2.2f;
+    angle -= 0.2f;
 
 }
 void Vaisseaux::turnRight()
 {
-
-    angle += 2.2f;
-
+    angle += 0.2f;
 }
 
