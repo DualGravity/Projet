@@ -1,31 +1,23 @@
 #ifndef VAISSEAUX_HPP_INCLUDED
 #define VAISSEAUX_HPP_INCLUDED
-#include "Initialisation.hpp"
 
-class Vaisseaux
+#include "Initialisation.hpp"
+#include "corps.hpp"
+
+class Vaisseaux : public Corps
 {
 	public:
-	Vaisseaux(float px, float py, float vx,float vy, float ax,float ay, float angle);
-
-	float getpx() const;
-	float getpy() const;
-	float getvx() const;
-	float getvy() const;
-	float getax() const;
-	float getay() const;
-	float getAngle() const;
-
-	void setpx(float tpx);
-	void setpy(float tpy);
+	Vaisseaux(G_engine *t_gen,std::string t_name,b2World *t_world,float t_density,float t_friction,float t_restitution,float t_px,float t_py,float t_tx,float t_ty,float t_angledeg,float t_puissance,float t_vitesserot);
+    ~Vaisseaux();
 
 	void turnLeft();
 	void turnRight();
-	void applyForce(float fx, float fy);
-    void step(int pdt);
+	void applyForce(float cmb);
 
-	private:
-        float px, py;
-        float vx, vy;
+
+	protected:
+        float m_puissance;
+        float m_vitesserot;
         float ax, ay;
         float angle;
 };

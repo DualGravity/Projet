@@ -1,6 +1,9 @@
 #ifndef CORPSFIX_HPP_INCLUDED
 #define CORPSFIX_HPP_INCLUDED
+
 #include "Initialisation.hpp"
+#include "g_engine.hpp"
+
 class Corpsfix
 {
 	public:
@@ -8,7 +11,7 @@ class Corpsfix
 
 	~Corpsfix();
 
-	private:
+	protected:
 	G_engine *m_gen;                            //pointer vers le G engine
 	b2World *m_world;                           //pointer vers le World Box2d
 	b2Body *m_groundBody2;                      //pointer vers l'objet dans Box2d

@@ -1,73 +1,37 @@
 #include "vaisseaux.hpp"
-Vaisseaux::Vaisseaux(float px, float py, float vx,float vy, float ax,float ay, float angle) : px(px), py(py), angle(angle),vx(vx),vy(vy),ax(ax),ay(ay)
-{
 
+Vaisseaux::Vaisseaux(G_engine *t_gen,std::string t_name,b2World *t_world,float t_density,float t_friction,float t_restitution,float t_px,float t_py,float t_tx,float t_ty,float t_angledeg,
+float t_puissance,float t_vitesserot) :
+Corps(t_gen,t_name,t_world,t_density,t_friction,t_restitution,t_px,t_py,t_tx,t_ty,t_angledeg), m_puissance(t_puissance),m_vitesserot(t_vitesserot)
+{
+    p_dynamiquebody->SetAngularDamping(5);
+
+    b2Vec2 mun;
+	mun.x = 0;
+    mun.y = 0;
+    p_dynamiquebody->SetLinearVelocity(mun);
 }
 
-void Vaisseaux::step(int dt)
+Vaisseaux::~Vaisseaux()
 {
-    vx += ax * dt;
-    vy += ay * dt;
-    px += vx * dt;
-    py += vy * dt;
-
-    ax = 0;
-    ay = 0;
+    //appeler destruteur
 }
-void Vaisseaux::applyForce(float fx, float fy)
+
+void Vaisseaux::applyForce(float cmb)
 {
-    float speed;
-    speed = fx;
-
-    ax += cos((angle + 90) * M_PI / 180.0) * speed;
-    ay += sin((angle + 90) * M_PI / 180.0) * speed;
-}
-float Vaisseaux::getpx() const
-{
-
-    return px;
-
-}
-void Vaisseaux::setpx(float tpx)
-{
-
-    px = tpx;
-
-}
-float Vaisseaux::getpy() const
-{
-    return py;
-}
-void Vaisseaux::setpy(float tpy)
-{
-    py = tpy;
-}
-float Vaisseaux::getvx() const
-{
-
-    return vx;
-
-}
-float Vaisseaux::getvy() const
-{
-
-    return vy;
-
-}
-float Vaisseaux::getAngle() const
-{
-
-    return angle;
-
+    b2Vec2 vec;
+    vec.x = cos(p_dynamiquebody->GetAngle()-(M_PI/2)) * m_puissance * cmb;
+    vec.y = sin(p_dynamiquebody->GetAngle()-(M_PI/2)) * m_puissance * cmb;
+    p_dynamiquebody->ApplyLinearImpulse(vec,p_dynamiquebody->GetWorldCenter(),true);
 }
 void Vaisseaux::turnLeft()
 {
-
-    angle -= 0.2f;
-
+    p_dynamiquebody->ApplyAngularImpulse(-m_vitesserot,true);
 }
 void Vaisseaux::turnRight()
 {
-    angle += 0.2f;
+    p_dynamiquebody->ApplyAngularImpulse(m_vitesserot,true);
 }
+
+
 

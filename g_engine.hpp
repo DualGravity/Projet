@@ -10,19 +10,25 @@ class G_engine
 	~G_engine();
 	void affiche_sprites();
 	sf::Sprite* create_sprite(std::string name,float t_px,float t_py,float t_angle);
-	sf::Sprite get_sprite();
+	void Changeview(float factor,sf::Vector2f t_vec);
 
+	void affiche_Texte();
 
-	private:
+	protected:
 	sf::RenderWindow *p_app;
-	sf::Texture m_texture;
+	sf::Clock clock;
+	sf::Text text;
+	sf::Font font;
+	sf::Vector2f g_vec;
+	std::deque <sf::Texture*> de_texture;
 	std::deque <sf::Sprite*> de_sprite;
-
-	std::string name;
-	float m_px, m_py, m_angle;
+	sf::View *p_view;
+	float view_factor;
 
 
 
 };
 
 #endif // G_ENGINE_HPP_INCLUDED
+
+
